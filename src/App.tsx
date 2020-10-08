@@ -1,10 +1,14 @@
-import { CssBaseline, MenuItem, TextField } from '@material-ui/core'
-import React from 'react'
+import { MenuItem, TextField } from '@material-ui/core'
+import React, { useEffect } from 'react'
+import axios from 'axios'
 import { FilterProps } from 'react-table'
-
-import { Page } from './Page'
 import { Table } from './Table'
-import { PersonData, makeData } from './utils'
+import { PersonData, dataArr } from './utils'
+import './App.css'
+
+
+
+
 
 function SelectColumnFilter({
   column: { filterValue, render, setFilter, preFilteredRows, id },
@@ -78,25 +82,34 @@ const columns = [
         Header: 'CreatedOn',
         accessor: 'createdOn',
         disableFilters: true,
-        Cell: (ce: any) =>  <span>{ce.value && new Date(ce.value).toDateString()}</span>,
+        Cell: (ce: any) => <span>{ce.value && new Date(ce.value).toDateString()}</span>,
       },
     ],
   },
-].flatMap((c:any)=>c.columns) // to drop header groups
+].flatMap((c: any) => c.columns) // to drop header groups
+
+interface User {
+  id: number
+  firstName: string
+}
 
 const App: React.FC = () => {
-  const [data] = React.useState<PersonData[]>(() => makeData(100))
+  let data = dataArr
 
+  useEffect(() => {
+    // axios.get<User[]>('https://jsonplaceholder.typicode.com/posts').then((response) => {
+    //   console.log(response.data)
+    // })
+
+    
+
+    // curly.get('https://storage.googleapis.com/king-airnd-recruitment-sandbox-data/data.json')
+  })
 
   return (
-    <Page>
-      <CssBaseline />
-      <Table<PersonData>
-        name={'testTable'}
-        columns={columns}
-        data={data}
-      />
-    </Page>
+    <div className='main'>
+      <Table<PersonData> name={'testTable'} columns={columns} data={dataArr} />
+    </div>
   )
 }
 

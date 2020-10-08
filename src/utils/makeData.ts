@@ -1,48 +1,343 @@
-import namor from 'namor'
-
 export type Person = {
   id: number
   name: string
   status: string
   description: string
-  delta: number
-  createdOn: Date
-}
-
-const range = (len: number) => {
-  const arr = []
-  for (let i = 0; i < len; i++) {
-    arr.push(i)
-  }
-  return arr
-}
-
-const newPerson = (): Person => {
-  const statusChance = Math.random()
-  return {
-    id: +(Math.random()*1000).toFixed(0),
-    name: namor.generate({ words: 1, saltLength: 0, subset: 'manly' }),
-    status: statusChance > 0.66 ? 'Excellent' : statusChance > 0.33 ? 'Good' : 'Bad',
-    description: namor.generate({ words: 4, saltLength: 8 }),
-    delta: Math.floor(Math.random() * 100),
-    createdOn: new Date(Math.random() * +new Date()),
-  }
+  delta?: any
+  createdOn: any
 }
 
 export interface PersonData extends Person {
   subRows?: PersonData[]
 }
 
-export function makeData(...lens: number[]): PersonData[] {
-  const makeDataLevel = (depth = 0): PersonData[] => {
-    const len = lens[depth]
-    return range(len).map((_) => {
-      return {
-        ...newPerson(),
-        subRows: lens[depth + 1] ? makeDataLevel(depth + 1) : undefined,
-      }
-    })
-  }
-
-  return makeDataLevel()
-}
+export const dataArr = [
+  {
+    id: 6690,
+    status: 'COMPLETED',
+    createdOn: 1543325977000,
+    name: 'gallant_chandrasekhar',
+    description: 'Etincidunt etincidunt ut voluptatem numquam dolore aliquam dolore.',
+    delta: 1770,
+  },
+  {
+    id: 6689,
+    status: 'COMPLETED',
+    createdOn: 1543325975000,
+    name: 'vibrant_hypatia',
+    description: 'Quisquam eius quiquia eius dolor.',
+    delta: 1273,
+  },
+  {
+    id: 6688,
+    status: 'COMPLETED',
+    createdOn: 1543306859000,
+    name: 'agitated_galileo',
+    description: 'Quisquam porro quisquam dolorem tempora modi quiquia.',
+    delta: 1262,
+  },
+  {
+    id: 6687,
+    status: 'COMPLETED',
+    createdOn: 1543306820000,
+    name: 'eloquent_davinci',
+    description: 'Ipsum est labore ipsum dolorem dolor.',
+    delta: 1820,
+  },
+  {
+    id: 6684,
+    status: 'COMPLETED',
+    createdOn: 1543248082000,
+    name: 'quizzical_yalow',
+    description: 'Dolor aliquam porro amet neque dolorem.',
+    delta: 1352,
+  },
+  {
+    id: 6683,
+    status: 'COMPLETED',
+    createdOn: 1543244161000,
+    name: 'fervent_nightingale',
+    description: 'Non etincidunt ut ipsum velit dolorem tempora tempora.',
+    delta: 2651,
+  },
+  {
+    id: 6682,
+    status: 'COMPLETED',
+    createdOn: 1543241621000,
+    name: 'youthful_hawking',
+    description: 'Etincidunt labore quisquam tempora tempora.',
+    delta: 2776,
+  },
+  {
+    id: 6681,
+    status: 'COMPLETED',
+    createdOn: 1543237377000,
+    name: 'hungry_carson',
+    description: 'Tempora consectetur sed non modi quiquia.',
+    delta: 2721,
+  },
+  {
+    id: 6680,
+    status: 'COMPLETED',
+    createdOn: 1543227270000,
+    name: 'determined_archimedes',
+    description: 'Quiquia dolor quaerat dolore etincidunt modi velit.',
+    delta: 215,
+  },
+  {
+    id: 6679,
+    status: 'COMPLETED',
+    createdOn: '2018-11-23T14:06:25.000Z',
+    name: 'upbeat_einstein',
+    description: 'Labore adipisci etincidunt dolorem dolorem numquam non.',
+    delta: 216,
+  },
+  {
+    id: 6677,
+    status: 'COMPLETED',
+    createdOn: 1542976575000,
+    name: 'priceless_haibt',
+    description: 'Quiquia quisquam adipisci eius dolor ipsum.',
+    delta: 319,
+  },
+  {
+    id: 6676,
+    status: 'COMPLETED',
+    createdOn: '2018-11-23T13:26:01.000Z',
+    name: 'condescending_pare',
+    description: 'Neque quaerat dolorem tempora numquam magnam etincidunt eius.',
+    delta: 71,
+  },
+  {
+    id: 6675,
+    status: 'COMPLETED',
+    createdOn: 1542975336000,
+    name: 'mystifying_banach',
+    description: 'Labore tempora tempora sit.',
+    delta: 2000,
+  },
+  {
+    id: 6674,
+    status: 'COMPLETED',
+    createdOn: '2018-11-22T17:16:00.000Z',
+    name: 'silly_almeida',
+    description: 'Voluptatem aliquam dolore voluptatem.',
+  },
+  {
+    id: 6669,
+    status: 'CANCELED',
+    createdOn: 1542721971000,
+    name: 'epic_chandrasekhar',
+    description: 'Porro consectetur magnam modi neque sit modi.',
+    delta: 21,
+  },
+  {
+    id: 6629,
+    status: 'COMPLETED',
+    createdOn: '2018-11-15T13:17:16.000Z',
+    name: 'confident_elion',
+    description: 'Neque amet numquam dolore velit etincidunt.',
+    delta: 735,
+  },
+  {
+    id: 6599,
+    status: 'COMPLETED',
+    createdOn: '2018-11-14T13:53:46.000Z',
+    name: 'gracious_heyrovsky',
+    description: 'Dolor sed modi non quisquam sed etincidunt voluptatem.',
+    delta: 16,
+  },
+  {
+    id: 6596,
+    status: 'COMPLETED',
+    createdOn: '2018-11-14T13:39:38.000Z',
+    name: 'hardcore_pasteur',
+    description: 'Aliquam quisquam aliquam est ut eius.',
+    delta: 1024,
+  },
+  {
+    id: 6532,
+    status: 'COMPLETED',
+    createdOn: '2018-11-12T09:38:47.000Z',
+    name: 'zen_mcclintock',
+    description: 'Sed sit est ut quaerat quisquam.',
+    delta: 872,
+  },
+  {
+    id: 6524,
+    status: 'COMPLETED',
+    createdOn: '2018-11-09T13:21:34.000Z',
+    name: 'pensive_davinci',
+    description: 'Consectetur quisquam non adipisci.',
+    delta: 2404,
+  },
+  {
+    id: 6523,
+    status: 'COMPLETED',
+    createdOn: 1541765993000,
+    name: 'hopeful_snyder',
+    description: 'Quaerat non tempora numquam dolore magnam modi.',
+    delta: 3575,
+  },
+  {
+    id: 6522,
+    status: 'COMPLETED',
+    createdOn: 1541765407000,
+    name: 'heuristic_pare',
+    description: 'Quiquia non tempora ut dolore numquam dolor.',
+    delta: 3721,
+  },
+  {
+    id: 6521,
+    status: 'COMPLETED',
+    createdOn: 1541765354000,
+    name: 'fervent_shockley',
+    description: 'Sit magnam tempora ipsum.',
+    delta: 5014,
+  },
+  {
+    id: 6516,
+    status: 'COMPLETED',
+    createdOn: 1541583307000,
+    name: 'priceless_murdock',
+    description: 'Consectetur labore magnam quiquia magnam.',
+    delta: 73,
+  },
+  {
+    id: 6514,
+    status: 'COMPLETED',
+    createdOn: 1541541446000,
+    name: 'jolly_wing',
+    description: 'Voluptatem ut aliquam velit.',
+    delta: 73,
+  },
+  {
+    id: 6502,
+    status: 'COMPLETED',
+    createdOn: 1541174811000,
+    name: 'stoic_swanson',
+    description: 'Modi ipsum neque modi quisquam.',
+    delta: 219,
+  },
+  {
+    id: 6501,
+    status: 'COMPLETED',
+    createdOn: '2018-11-02T16:26:02.000Z',
+    name: 'flamboyant_ptolemy',
+    description: 'Ipsum velit magnam eius.',
+    delta: 1862,
+  },
+  {
+    id: 6490,
+    status: 'COMPLETED',
+    createdOn: 1540989714000,
+    name: 'agitated_yonath',
+    description: 'Est adipisci tempora adipisci dolor.',
+    delta: 117,
+  },
+  {
+    id: 6474,
+    status: 'COMPLETED',
+    createdOn: 1540904740000,
+    name: 'vigorous_heyrovsky',
+    description: 'Dolorem sed labore eius ut sed ut.',
+    delta: 427,
+  },
+  {
+    id: 6447,
+    status: 'COMPLETED',
+    createdOn: 1540549922000,
+    name: 'agitated_euclid',
+    description: 'Dolor velit non aliquam modi sed porro eius.',
+    delta: 1570,
+  },
+  {
+    id: 6440,
+    status: 'COMPLETED',
+    createdOn: '2018-10-26T06:43:15.000Z',
+    name: 'confident_boyd',
+    description: 'Etincidunt voluptatem numquam eius porro.',
+    delta: 1843,
+  },
+  {
+    id: 6425,
+    status: 'COMPLETED',
+    createdOn: 1540461037000,
+    name: 'peaceful_pare',
+    description: 'Tempora voluptatem sit sit.',
+    delta: 1209,
+  },
+  {
+    id: 6424,
+    status: 'COMPLETED',
+    createdOn: 1540450933000,
+    name: 'upbeat_yonath',
+    description: 'Quiquia dolorem ut sit velit tempora magnam amet.',
+    delta: 1804,
+  },
+  {
+    id: 6421,
+    status: 'COMPLETED',
+    createdOn: 1540389932000,
+    name: 'wizardly_allen',
+    description: 'Ipsum etincidunt non porro adipisci velit.',
+    delta: 1308,
+  },
+  {
+    id: 6418,
+    status: 'COMPLETED',
+    createdOn: '2018-10-24T13:41:22.000Z',
+    name: 'suspicious_haibt',
+    description:
+      'Consectetur sed consectetur voluptatem est ut dolor dolore quaerat quaerat ipsum neque amet modi eius porro tempora voluptatem labore modi quaerat etincidunt eius dolor sit neque magnam ipsum modi velit aliquam dolore voluptatem ipsum sed modi magnam neque velit amet etincidunt velit neque porro etincidunt.',
+    delta: 1879,
+  },
+  {
+    id: 6398,
+    status: 'COMPLETED',
+    createdOn: 1540281399000,
+    name: 'pedantic_hugle',
+    description: 'Labore ipsum neque magnam quisquam.',
+    delta: 1949,
+  },
+  {
+    id: 6393,
+    status: 'COMPLETED',
+    createdOn: 1540275898000,
+    name: 'wonderful_hodgkin',
+    description: 'Dolor dolorem velit etincidunt.',
+    delta: 1290,
+  },
+  {
+    id: 6386,
+    status: 'COMPLETED',
+    createdOn: 1540202354000,
+    name: 'musing_darwin',
+    description: 'Neque non labore est eius dolore amet.',
+    delta: 1513,
+  },
+  {
+    id: 6381,
+    status: 'COMPLETED',
+    createdOn: '2018-10-22T07:50:47.000Z',
+    name: 'amazing_hawking',
+    description: 'Etincidunt dolore aliquam dolor dolore eius consectetur dolorem.',
+    delta: 404,
+  },
+  {
+    id: 6380,
+    status: 'COMPLETED',
+    createdOn: '2018-10-19T18:13:31.000Z',
+    name: 'amazing_hodgkin',
+    description: 'Quiquia numquam etincidunt dolorem.',
+    delta: 420,
+  },
+  {
+    id: 6299,
+    status: 'COMPLETED',
+    createdOn: 1539775306000,
+    name: 'confident_hopper',
+    description: 'Magnam porro ut ipsum.',
+    delta: 132,
+  },
+]

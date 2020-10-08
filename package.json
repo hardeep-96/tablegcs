@@ -1,14 +1,14 @@
 {
-  "name": "react-table-example",
+  "name": "tablegcs",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.10.0",
     "@material-ui/icons": "^4.9.1",
     "@welldone-software/why-did-you-render": "^4.2.5",
+    "axios": "^0.20.0",
     "classnames": "^2.2.6",
     "match-sorter": "^4.1.0",
-    "namor": "^2.0.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-json-view": "^1.19.1",
