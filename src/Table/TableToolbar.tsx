@@ -1,11 +1,9 @@
-import { Button, IconButton, Theme, Toolbar, Tooltip, createStyles, makeStyles } from '@material-ui/core'
+import { IconButton, Theme, Toolbar, Tooltip, createStyles, makeStyles } from '@material-ui/core'
 import FilterListIcon from '@material-ui/icons/FilterList'
 import classnames from 'classnames'
 import React, { MouseEvent, MouseEventHandler, PropsWithChildren, ReactElement, useCallback, useState } from 'react'
 import { TableInstance } from 'react-table'
 
-import { TableMouseEventHandler } from '../types/react-table-config'
-import { ColumnHidePage } from './ColumnHidePage'
 import { FilterPage } from './FilterPage'
 
 export const useStyles = makeStyles((theme: Theme) =>
@@ -33,74 +31,12 @@ export const useStyles = makeStyles((theme: Theme) =>
   })
 )
 
-type InstanceActionButton<T extends object> = {
-  instance: TableInstance<T>
-  icon?: JSX.Element
-  onClick: TableMouseEventHandler
-  enabled?: (instance: TableInstance<T>) => boolean
-  label: string
-  variant?: 'right' | 'left'
-}
-
 type ActionButton<T extends object> = {
   icon?: JSX.Element
   onClick: MouseEventHandler
   enabled?: boolean
   label: string
   variant?: 'right' | 'left'
-}
-
-export const InstanceLabeledActionButton = <T extends object>({
-  instance,
-  icon,
-  onClick,
-  label,
-  enabled = () => true,
-}: InstanceActionButton<T>): ReactElement => {
-  return (
-    <Button variant='contained' color='primary' onClick={onClick(instance)} disabled={!enabled(instance)}>
-      {icon}
-      {label}
-    </Button>
-  )
-}
-
-export const LabeledActionButton = <T extends object>({
-  icon,
-  onClick,
-  label,
-  enabled = true,
-}: ActionButton<T>): ReactElement => {
-  return (
-    <Button variant='contained' color='primary' onClick={onClick} disabled={!enabled}>
-      {icon}
-      {label}
-    </Button>
-  )
-}
-
-export const InstanceSmallIconActionButton = <T extends object>({
-  instance,
-  icon,
-  onClick,
-  label,
-  enabled = () => true,
-  variant,
-}: InstanceActionButton<T>) => {
-  const classes = useStyles({})
-  return (
-    <Tooltip title={label} aria-label={label}>
-      <span>
-        <IconButton
-          className={classnames({ [classes.rightIcons]: variant === 'right', [classes.leftIcons]: variant === 'left' })}
-          onClick={onClick(instance)}
-          disabled={!enabled(instance)}
-        >
-          {icon}
-        </IconButton>
-      </span>
-    </Tooltip>
-  )
 }
 
 export const SmallIconActionButton = <T extends object>({
@@ -130,9 +66,7 @@ type TableToolbar<T extends object> = {
   instance: TableInstance<T>
 }
 
-export function TableToolbar<T extends object>({
-  instance,
-}: PropsWithChildren<TableToolbar<T>>): ReactElement | null {
+export function TableToolbar<T extends object>({ instance }: PropsWithChildren<TableToolbar<T>>): ReactElement | null {
   const classes = useStyles()
   const [anchorEl, setAnchorEl] = useState<Element | undefined>(undefined)
   const [columnsOpen, setColumnsOpen] = useState(false)
@@ -156,7 +90,6 @@ export function TableToolbar<T extends object>({
   return (
     <Toolbar className={classes.toolbar}>
       <div className={classes.rightButtons}>
-        <ColumnHidePage<T> instance={instance} onClose={handleClose} show={columnsOpen} anchorEl={anchorEl} />
         <FilterPage<T> instance={instance} onClose={handleClose} show={filterOpen} anchorEl={anchorEl} />
         <SmallIconActionButton<T>
           icon={<FilterListIcon />}

@@ -7,9 +7,6 @@ import { PersonData, dataArr } from './utils'
 import './App.css'
 
 
-
-
-
 function SelectColumnFilter({
   column: { filterValue, render, setFilter, preFilteredRows, id },
 }: FilterProps<PersonData>) {
@@ -97,13 +94,9 @@ const App: React.FC = () => {
   let data = dataArr
 
   useEffect(() => {
-    // axios.get<User[]>('https://jsonplaceholder.typicode.com/posts').then((response) => {
-    //   console.log(response.data)
-    // })
-
-    
-
-    // curly.get('https://storage.googleapis.com/king-airnd-recruitment-sandbox-data/data.json')
+    axios.get<User[]>('https://jsonplaceholder.typicode.com/posts').then((response) => {
+      console.log(response.data)
+    })
   })
 
   return (
